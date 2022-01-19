@@ -37,6 +37,14 @@ const movieSchema = new mongoose.Schema({
         required: true,
         validate: { validator: (e) => validator.isUrl(e) },
     },
+    nameRU: {
+        type: String,
+        required: true,
+    },
+    nameEN: {
+        type: String,
+        required: true,
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -45,14 +53,6 @@ const movieSchema = new mongoose.Schema({
     movieId: {
         required: true,
         type: mongoose.Schema.Types.ObjectId,
-    },
-    nameRU: {
-        type: String,
-        required: true,
-    },
-    nameEN: {
-        type: String,
-        required: true,
     },
 });
 
