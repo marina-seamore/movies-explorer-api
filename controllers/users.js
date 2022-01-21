@@ -21,6 +21,8 @@ module.exports.updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new Err400('Information about the user was filled incorrectly'));
+      } if (err.code === 11000) {
+        next(new Err409('Email already exists'));
       } else { next(err); }
     });
 };
