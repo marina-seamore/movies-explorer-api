@@ -37,6 +37,10 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: { validator: (e) => validator.isUrl(e) },
   },
+  movieId: {
+    required: true,
+    type: Number,
+  },
   nameRU: {
     type: String,
     required: true,
@@ -49,11 +53,7 @@ const movieSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'user',
-  },
-  movieId: {
-    required: true,
-    type: mongoose.Schema.Types.ObjectId,
-  },
+  }
 });
 
 module.exports = mongoose.model('movie', movieSchema);

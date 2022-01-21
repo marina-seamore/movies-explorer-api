@@ -15,6 +15,7 @@ router.post(
       image: Joi.string().required().regex(/https?:\/\/(w{3}.)?[\w-]+\.\S+[^><]/),
       trailer: Joi.string().required().regex(/https?:\/\/(w{3}.)?[\w-]+\.\S+[^><]/),
       thumbnail: Joi.string().required().regex(/https?:\/\/(w{3}.)?[\w-]+\.\S+[^><]/),
+      movieId: Joi.number().required(),
       nameRU: Joi.string().required().regex(/[а-яё\d\s]/),
       nameEN: Joi.string().required().regex(/[\w\s]/),
     }),

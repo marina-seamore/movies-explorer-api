@@ -19,6 +19,7 @@ module.exports.createMovie = (req, res, next) => {
     image,
     trailer,
     thumbnail,
+    movieId,
     nameRU,
     nameEN,
   } = req.body;
@@ -32,6 +33,7 @@ module.exports.createMovie = (req, res, next) => {
       image,
       trailer,
       thumbnail,
+      movieId,
       nameRU,
       nameEN,
       owner: req.user._id,
