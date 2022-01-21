@@ -12,6 +12,7 @@ const cors = require('cors');
 
 const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const errorHandler = require('./middlewares/errorHandler');
 
 mongoose.connect('mongodb://localhost:27017/moviesdb', { useNewUrlParser: true });
 
@@ -36,11 +37,7 @@ app.use('/', routes);
 // errors
 app.use(errorLogger);
 app.use(errors());
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-  res.status(statusCode).send({ message: statusCode === 500 ? err.message : message });
-  next();
-});
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
