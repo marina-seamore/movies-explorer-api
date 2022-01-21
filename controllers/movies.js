@@ -5,7 +5,7 @@ const Err403 = require('../errors/Err403');
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
-    .then((movies) => res.status(200).send(movies))
+    .then((movies) => res.send(movies))
     .catch((next));
 };
 
@@ -39,7 +39,7 @@ module.exports.createMovie = (req, res, next) => {
       owner: req.user._id,
     },
   )
-    .then((movie) => res.status(200).send(movie))
+    .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new Err400('Information for new movie was filled incorrectly'));
