@@ -33,10 +33,10 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => User.create({ name, email, password: hash })
       .then(() => res.status(200).send({ name, email }))
       .catch((err) => {
-        if (err.name === 'ValidationError') {
-          next(new Err400('Information about the new user was filled incorrectly'));
+        if (err.name === 'ValidationError' || err.name === 'CastError') {
+          throw new Err400('Information about the new user was filled incorrectly');
         } if (err.code === 11000) {
-          next(new Err409('Email already exists'));
+          throw new Err409('Email already exists');
         } else { next(err); }
       }));
 };
