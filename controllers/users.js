@@ -5,8 +5,7 @@ const Err400 = require('../errors/Err400');
 const Err409 = require('../errors/Err409');
 
 module.exports.getUserInfo = (req, res, next) => {
-  const email = req.body;
-  User.find(email)
+  User.findById(req.user._id)
     .orFail(new Err404('User not found'))
     .then((user) => {
       res.status(200).send(user);
