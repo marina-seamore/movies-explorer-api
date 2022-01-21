@@ -25,17 +25,17 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    validate: { validator: (e) => validator.isUrl(e) },
+    validate: { validator: (e) => validator.isURL(e) },
   },
   trailer: {
     type: String,
     required: true,
-    validate: { validator: (e) => validator.isUrl(e) },
+    validate: { validator: (e) => validator.isURL(e) },
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: { validator: (e) => validator.isUrl(e) },
+    validate: { validator: (e) => validator.isURL(e) },
   },
   movieId: {
     required: true,
@@ -53,7 +53,7 @@ const movieSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'user',
-  }
+  },
 });
 
 module.exports = mongoose.model('movie', movieSchema);

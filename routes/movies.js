@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const validator = require('validator');
 const { celebrate, Joi } = require('celebrate');
 const { getMovies, createMovie, removeMovie } = require('../controllers/movies');
 
@@ -12,9 +13,21 @@ router.post(
       duration: Joi.number().required(),
       year: Joi.number().required(),
       description: Joi.string().required(),
-      image: Joi.string().required().regex(/https?:\/\/(w{3}.)?[\w-]+\.\S+[^><]/),
-      trailer: Joi.string().required().regex(/https?:\/\/(w{3}.)?[\w-]+\.\S+[^><]/),
-      thumbnail: Joi.string().required().regex(/https?:\/\/(w{3}.)?[\w-]+\.\S+[^><]/),
+      image: Joi.string().required().custom((value, helpers) => {
+        if (validator.isURL(value)) {
+          return value;
+        } return helpers.message('Image should be a URL');
+      }),
+      trailer: Joi.string().required().custom((value, helpers) => {
+        if (validator.isURL(value)) {
+          return value;
+        } return helpers.message('Trailer should be a URL');
+      }),
+      thumbnail: Joi.string().required().custom((value, helpers) => {
+        if (validator.isURL(value)) {
+          return value;
+        } return helpers.message('Thumbnail should be a URL');
+      }),
       movieId: Joi.number().required(),
       nameRU: Joi.string().required().regex(/[а-яё\d\s]/),
       nameEN: Joi.string().required().regex(/[\w\s]/),
