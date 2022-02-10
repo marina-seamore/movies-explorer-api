@@ -3,9 +3,9 @@ const validator = require('validator');
 const { celebrate, Joi } = require('celebrate');
 const { getMovies, createMovie, removeMovie } = require('../controllers/movies');
 
-router.get('/', getMovies);
+router.get('/movies', getMovies);
 router.post(
-  '/',
+  '/movies',
   celebrate({
     body: Joi.object().keys({
       country: Joi.string().required(),
@@ -36,7 +36,7 @@ router.post(
   createMovie,
 );
 router.delete(
-  '/:movieId',
+  '/movies/:movieId',
   celebrate({ params: Joi.object().keys({ movieId: Joi.string().length(24).hex() }) }),
   removeMovie,
 );
