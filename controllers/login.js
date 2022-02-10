@@ -16,7 +16,7 @@ module.exports.login = (req, res, next) => {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
-      }).send({ user });
+      }).send(user);
     })
     .catch((err) => {
       if (err.message.includes('password')) {
@@ -26,5 +26,5 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.cookie('jwt', null).send({ message: 'user is logged out' });
+  res.clearCookie('jwt').send({ message: 'user is logged out' });
 };
